@@ -1,0 +1,26 @@
+{
+  "name": "mi-proyecto-backend",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon -L --inspect=0.0.0.0:9222 --watch . --ext js,json,hjson --nolazy ./index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hjson": "^3.2.2",
+    "luxon": "^3.7.2",
+    "mongodb": "^7.5.0",
+    "node-cron": "^4.6.0",
+    "node-fetch": "^3.3.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
