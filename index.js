@@ -4,8 +4,15 @@ import { ZServer } from "./lib/ZServer.js";
 import fs from "fs";
 import mongo from "./lib/MongoDB.js";
 import temblores from "./lib/Temblores.js";
+import eventosAgregados from "./lib/EventosAgregados.js";
+import eventosAgregadosPronosticados from "./lib/EventosAgregadosPronosticados.js";
 import "./lib/DescargaTembloresUSGS.js";
 import "./lib/ProcesaTembloresDescargados.js";
+import "./lib/Clusteriza.js";
+import "./lib/EntrenarModelo.js";
+import "./lib/EvaluarModelo.js";
+import "./lib/GenerarPronostico.js";
+import "./lib/GeocodificarPronostico.js";
 import ejecucionProceso from "./lib/EjecucionProceso.js";
 import Scheduller from "./lib/Scheduller.js";
 
@@ -27,6 +34,8 @@ async function createHTTPServer() {
         let zServer = new ZServer(app, "/api/v1");
 
         zServer.registerModule(temblores);
+        zServer.registerModule(eventosAgregados);
+        zServer.registerModule(eventosAgregadosPronosticados);
         zServer.registerModule(ejecucionProceso);
         //zServer.registerModule(usuarios);
         let version = "?";
