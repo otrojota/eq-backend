@@ -6,6 +6,8 @@ import mongo from "./lib/MongoDB.js";
 import temblores from "./lib/Temblores.js";
 import eventosAgregados from "./lib/EventosAgregados.js";
 import eventosAgregadosPronosticados from "./lib/EventosAgregadosPronosticados.js";
+import eventosAgregadosPronosticadosPublicados from "./lib/EventosAgregadosPronosticadosPublicados.js";
+import configuracion from "./lib/Configuracion.js";
 import "./lib/DescargaTembloresUSGS.js";
 import "./lib/ProcesaTembloresDescargados.js";
 import "./lib/Clusteriza.js";
@@ -13,6 +15,7 @@ import "./lib/EntrenarModelo.js";
 import "./lib/EvaluarModelo.js";
 import "./lib/GenerarPronostico.js";
 import "./lib/GeocodificarPronostico.js";
+import "./lib/SincronizarLocalidades.js";
 import ejecucionProceso from "./lib/EjecucionProceso.js";
 import Scheduller from "./lib/Scheduller.js";
 
@@ -36,6 +39,8 @@ async function createHTTPServer() {
         zServer.registerModule(temblores);
         zServer.registerModule(eventosAgregados);
         zServer.registerModule(eventosAgregadosPronosticados);
+        zServer.registerModule(eventosAgregadosPronosticadosPublicados);
+        zServer.registerModule(configuracion);
         zServer.registerModule(ejecucionProceso);
         //zServer.registerModule(usuarios);
         let version = "?";
