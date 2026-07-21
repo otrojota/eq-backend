@@ -19,9 +19,30 @@ import "./lib/SincronizarLocalidades.js";
 import ejecucionProceso from "./lib/EjecucionProceso.js";
 import Scheduller from "./lib/Scheduller.js";
 
+async function aseguraIndicesConsultaMapa() {
+    const temblores = await mongo.collection("temblores");
+    const eventosAgregados = await mongo.collection("eventos_agregados");
+    await Promise.all([
+        temblores.createIndex(
+            { tiempo: 1 },
+            { name: "temblores_tiempo" }
+        ),
+        eventosAgregados.createIndex(
+            { tiempoFin: 1, tiempoInicio: 1 },
+            { name: "eventos_agregados_fin_inicio" }
+        ),
+        eventosAgregados.createIndex(
+            { tiempoInicio: 1, tiempoFin: 1 },
+            { name: "eventos_agregados_tiempo" }
+        )
+    ]);
+    console.log("[Backend] Índices de consulta del mapa verificados");
+}
+
 async function createHTTPServer() {
     try {
         await mongo.init();
+        await aseguraIndicesConsultaMapa();
 
         const app = express();
         app.use("/", express.static("www"));
